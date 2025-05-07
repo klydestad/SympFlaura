@@ -51,12 +51,14 @@ curl -X POST http://127.0.0.1:5000/predict \
 - Update streamlit file: 
     import requests
     then include flask stuff
-- Test is running:
-    cd backend
-    python3 app.py
 
-- Back to main
-    cd .. 
-    streamlit run streamlit_app.py
+
+- Run:   
+    - Terminal 1:
+        cd backend
+        python3 app.py
+
+    - Terminal 2:
+        streamlit run streamlit_app.py
 
 
