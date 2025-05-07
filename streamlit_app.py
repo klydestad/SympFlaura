@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 import plotly.express as px
 from datetime import datetime
 
@@ -32,9 +33,29 @@ with st.form("log_form"):
             "fatigue": fatigue,
             "pain": pain,
             "brain_fog": brain_fog,
-            "flare": None  # Placeholder until ML model is used
+            "flare": None
         }
+
+    # Send to Flask API for prediction
+        try:
+            response = requests.post(
+                "http://127.0.0.1:5000/predict",
+                json={
+                    "fatigue": fatigue,
+                    "pain": pain,
+                    "brain_fog": brain_fog
+                }
+            )
+            result = response.json().get("prediction", "unknown")
+            new_entry["flare"] = result
+            st.success(f"Entry logged! Flare-up risk: **{result.upper()}**")
+
+        except Exception as e:
+            result = "unknown"
+            st.warning(f"Could not get prediction. Error: {e}")
+            st.info("The entry was saved, but no risk level was added.")
+
+        # Append to CSV
         new_df = pd.DataFrame([new_entry])
         new_df.to_csv(DATA_PATH, mode='a', header=False, index=False)
-        st.success("Entry logged! Refresh the page to see it update.")
 

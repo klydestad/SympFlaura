@@ -5,7 +5,7 @@ Technologies:
 (Python, Streamlit API, Flask API)
 
 
-Process:
+Process (Delete later):
 
 1. Setup
 - (Created folders, files, intial framework)
@@ -37,10 +37,26 @@ curl -X POST http://127.0.0.1:5000/predict \
   {"prediction":"high risk"}
 
 
-4. Streamlit add
+4. Streamlit API add
 - Install necessary stuff: 
     pip install streamlit plotly pandas
 - Run: 
     streamlit run streamlit_app.py
 
 - Add an entry to the streamlit, refresh page, see graphs update/see sample_symptoms.csv update too
+
+5. Flask API add
+- Install
+    pip install requests
+- Update streamlit file: 
+    import requests
+    then include flask stuff
+- Test is running:
+    cd backend
+    python3 app.py
+
+- Back to main
+    cd .. 
+    streamlit run streamlit_app.py
+
+
