@@ -1,6 +1,9 @@
 # Sympflaura
 Symptom tracker &amp; prediction
 
+Technologies: 
+(Python, Streamlit API, Flask API)
+
 
 Process:
 
