@@ -1,6 +1,10 @@
 import pandas as pd
+import joblib
 
-# Placeholder prediction logic
+# Load the trained model once
+model = joblib.load("backend/flare_model.pkl")
+
 def predict_flare(df):
-    score = (df['fatigue'][0] + df['pain'][0]) / 2
-    return "high risk" if score > 5 else "low risk"
+    features = df[["fatigue", "pain", "brain_fog"]]
+    prediction = model.predict(features)[0]
+    return "high risk" if prediction == 1 else "low risk"

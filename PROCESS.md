@@ -69,6 +69,8 @@ curl -X POST http://127.0.0.1:5000/predict \
 
 
 ## 2. ML Component
-
+### 1. Setup
+    - create folder/notebook
+    - pip install scikit-learn joblib
 
 
