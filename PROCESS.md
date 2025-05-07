@@ -1,8 +1,15 @@
-# SympFlaura
-Symptom tracker &amp; prediction
 
-## Technologies: 
-(Python, Streamlit API, Flask API)
+# NEXT STEPS:
+- Deploy the Streamlit App Online, branding/UX, build analytics dashboards, add auth (user accounts)
+
+# Misc. Todo
+- Web scraping investigation as step
+- Construct proper readme format when done
+
+# Table of Contents
+1. Initial Setup Process
+2. ML Component
+
 
 
 ## 1. Initial Setup Process
@@ -61,13 +68,7 @@ curl -X POST http://127.0.0.1:5000/predict \
 
 
 
-## 2. ML model
+## 2. ML Component
 
 
-## NEXT STEPS:
-Deploy the Streamlit App Online, branding/UX, build analytics dashboards, add auth (user accounts)
-
-
-## Misc. Todo
-Web scraping investigation, construct proper readme vs. process
 
