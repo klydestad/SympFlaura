@@ -5,28 +5,39 @@ Symptom tracker &amp; prediction
 Process:
 
 1. Setup
-- Created folders, files, intial framework
+- (Created folders, files, intial framework)
 
 
 2.  Run & Install
-NOTES: 
-python3 -m venv venv
-source venv/bin/activate
+- Python environment setup
+    python3 -m venv venv
+    source venv/bin/activate
 
-INSTALL:
-pip install flask pandas
 
-RUN: 
-cd backend
-python app.py
+- INSTALL:
+    pip install flask pandas
+
+- RUN: 
+    cd backend
+    python app.py
+
+- create gitignore for venv
 
 
 3.  Testing connection works
-NEW TERMINAL TO TEST API:
+- NEW TERMINAL TO TEST API:
 curl -X POST http://127.0.0.1:5000/predict \
   -H "Content-Type: application/json" \
   -d '{"fatigue": 7, "pain": 6, "brain_fog": 5}'
 
-  should yield 
-  
+- should yield 
   {"prediction":"high risk"}
+
+
+4. Streamlit add
+- Install necessary stuff: 
+    pip install streamlit plotly pandas
+- Run: 
+    streamlit run streamlit_app.py
+
+- Add an entry to the streamlit, refresh page, see graphs update/see sample_symptoms.csv update too
