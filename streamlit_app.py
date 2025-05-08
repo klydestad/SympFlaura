@@ -30,6 +30,8 @@ authenticator = stauth.Authenticate(
 )
 
 login_data = authenticator.login(location='main')
+st.write("auth data:", login_data)
+
 
 if login_data is None:
     st.warning("Please enter your username and password")

@@ -100,11 +100,3 @@ curl -X POST http://127.0.0.1:5000/predict \
     - pip install streamlit-authenticator
     - update streamlit_app.py to include auth stuff
 
-authenticator = stauth.Authenticate(
-    names=names,
-    usernames=usernames,
-    passwords=hashed_passwords,
-    cookie_name='sympflaura_cookie',
-    key='sympflaura_key',
-    cookie_expiry_days=1
-)
