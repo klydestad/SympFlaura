@@ -1,4 +1,3 @@
-
 # Process
 This document serves to 
 - Capture step by step the initial setup & improvements (minus commit comments).
@@ -7,18 +6,19 @@ This document serves to
 
 
 ## NEXT STEPS:
-- Branding/UX
-- Add auth (user accounts)
 - Web scraping investigation as step
     - (Replace sample data with ...)
+- Branding/UX
 
 # Misc. Todo
 - Construct proper readme format when done
 
 # Table of Contents
 1. Initial Setup Process
-2. ML Component
+2. ML Component 
 3. Analytics Dashboards
+4. Deploy Streamlit App Online
+5. User Accounts
 
 
 ## 1. Initial Setup Process
@@ -93,3 +93,18 @@ curl -X POST http://127.0.0.1:5000/predict \
     - added requirements.txt: pip freeze > requirements.txt, ensure necessary packages there
     - Link: https://sympflaura.streamlit.app/ 
 
+
+
+## 5. User Accounts
+### 1. Setup 
+    - pip install streamlit-authenticator
+    - update streamlit_app.py to include auth stuff
+
+authenticator = stauth.Authenticate(
+    names=names,
+    usernames=usernames,
+    passwords=hashed_passwords,
+    cookie_name='sympflaura_cookie',
+    key='sympflaura_key',
+    cookie_expiry_days=1
+)
