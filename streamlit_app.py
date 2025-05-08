@@ -7,7 +7,6 @@ from datetime import datetime
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
 # auth code
 # Temporary login users (replace with Firebase or hashed creds later)
 names = ['Kiersten']
@@ -17,11 +16,11 @@ passwords = ['sympflaura123']
 hashed_passwords = stauth.Hasher(passwords).generate()
 
 authenticator = stauth.Authenticate(
-    names,
-    usernames,
-    hashed_passwords,
-    'sympflaura_cookie',
-    'sympflaura_key',
+    names=names,
+    usernames=usernames,
+    passwords=hashed_passwords,
+    cookie_name='sympflaura_cookie',
+    key='sympflaura_key',
     cookie_expiry_days=1
 )
 
