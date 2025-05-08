@@ -3,6 +3,8 @@ import pandas as pd
 import requests
 import plotly.express as px
 from datetime import datetime
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 DATA_PATH = "data/sample_symptoms.csv"
 
@@ -12,6 +14,8 @@ st.title("SympFlaura: Symptom Tracker")
 
 # Load existing data
 df = pd.read_csv(DATA_PATH, parse_dates=["date"])
+df["date"] = pd.to_datetime(df["date"])
+df["week"] = df["date"].dt.to_period("W").astype(str)
 
 # Plot symptom history
 st.subheader("📈 Symptom Timeline")
@@ -19,7 +23,7 @@ fig = px.line(df, x="date", y=["fatigue", "pain", "brain_fog"], markers=True)
 st.plotly_chart(fig)
 
 # Log new entry
-st.subheader("📝 Log Today’s Symptoms")
+st.subheader("📝 Log Today's Symptoms")
 
 with st.form("log_form"):
     fatigue = st.slider("Fatigue", 0, 10, 5)
@@ -59,3 +63,58 @@ with st.form("log_form"):
         new_df = pd.DataFrame([new_entry])
         new_df.to_csv(DATA_PATH, mode='a', header=False, index=False, lineterminator='\n')
 
+
+
+
+
+
+
+
+
+
+st.subheader("7-Day Rolling Symptom Averages")
+
+rolling_df = df.copy()
+rolling_df["rolling_fatigue"] = rolling_df["fatigue"].rolling(7).mean()
+rolling_df["rolling_pain"] = rolling_df["pain"].rolling(7).mean()
+rolling_df["rolling_brain_fog"] = rolling_df["brain_fog"].rolling(7).mean()
+
+fig2 = px.line(
+    rolling_df,
+    x="date",
+    y=["rolling_fatigue", "rolling_pain", "rolling_brain_fog"],
+    labels={"value": "Symptom Score"},
+    title="7-Day Rolling Averages"
+)
+st.plotly_chart(fig2)
+
+
+
+
+
+
+st.subheader("Weekly Flare Count")
+
+df["week"] = df["date"].dt.to_period("W").astype(str)
+weekly_flares = df.groupby("week")["flare"].sum().reset_index()
+
+fig3 = px.bar(
+    weekly_flares,
+    x="week",
+    y="flare",
+    labels={"flare": "Flare Count", "week": "Week"},
+    title="Number of Flares per Week"
+)
+st.plotly_chart(fig3)
+
+
+
+
+
+st.subheader("Symptom Correlation Heatmap")
+
+corr = df[["fatigue", "pain", "brain_fog"]].corr()
+
+fig4, ax = plt.subplots()
+sns.heatmap(corr, annot=True, cmap="coolwarm", ax=ax)
+st.pyplot(fig4)

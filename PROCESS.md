@@ -1,11 +1,17 @@
 
-# NEXT STEPS:
-- Web scraping investigation as step
-    - (Replace sample data with ...)
+# Process
+This document serves to 
+- Capture step by step the initial setup & improvements (minus commit comments).
+- Keep track of next steps, minor improvements, order of adding features
+- Instructions on setup (e.g. commands to run backend etc)
+
+
+## NEXT STEPS:
 - Deploy the Streamlit App Online
 - Branding/UX
-- Build analytics dashboards
 - Add auth (user accounts)
+- Web scraping investigation as step
+    - (Replace sample data with ...)
 
 # Misc. Todo
 - Construct proper readme format when done
@@ -13,7 +19,7 @@
 # Table of Contents
 1. Initial Setup Process
 2. ML Component
-
+3. Analytics Dashboards
 
 
 ## 1. Initial Setup Process
@@ -71,10 +77,17 @@ curl -X POST http://127.0.0.1:5000/predict \
 
 
 
-
-## 2. ML Component
+## 2. ML Component: Sample data
 ### 1. Setup
     - create folder/notebook
     - pip install scikit-learn joblib
+    - sample data added
+
+## 3. Analytics Dashboards
+### 1. Setup
+    - pip install seaborn
+
+
+
 
 
