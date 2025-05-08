@@ -7,7 +7,6 @@ This document serves to
 
 
 ## NEXT STEPS:
-- Deploy the Streamlit App Online
 - Branding/UX
 - Add auth (user accounts)
 - Web scraping investigation as step
@@ -92,4 +91,5 @@ curl -X POST http://127.0.0.1:5000/predict \
 ## 4. Deploy Streamlit App Online
 ### 1. Setup
     - added requirements.txt: pip freeze > requirements.txt, ensure necessary packages there
+    - Link: https://sympflaura.streamlit.app/ 
 
