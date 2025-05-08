@@ -4,6 +4,9 @@ Symptom tracker &amp; prediction
 ## Technologies: 
 (Python, Streamlit API, Flask API)
 
+## Skills:
+Machine learning, classification, user interface, data persistence
+
 
 ## 1. Initial Setup Process
 

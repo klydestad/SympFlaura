@@ -1,9 +1,13 @@
 
 # NEXT STEPS:
-- Deploy the Streamlit App Online, branding/UX, build analytics dashboards, add auth (user accounts)
+- Web scraping investigation as step
+    - (Replace sample data with ...)
+- Deploy the Streamlit App Online
+- Branding/UX
+- Build analytics dashboards
+- Add auth (user accounts)
 
 # Misc. Todo
-- Web scraping investigation as step
 - Construct proper readme format when done
 
 # Table of Contents

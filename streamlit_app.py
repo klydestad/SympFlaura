@@ -57,5 +57,5 @@ with st.form("log_form"):
 
         # Append to CSV
         new_df = pd.DataFrame([new_entry])
-        new_df.to_csv(DATA_PATH, mode='a', header=False, index=False)
+        new_df.to_csv(DATA_PATH, mode='a', header=False, index=False, lineterminator='\n')
 
