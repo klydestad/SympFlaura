@@ -29,19 +29,17 @@ authenticator = stauth.Authenticate(
     cookie_expiry_days=1
 )
 
-login_data = authenticator.login(location='main')
-st.write("auth data:", login_data)
+auth_status = authenticator.login(location='main')
 
-
-if login_data is None:
-    st.warning("Please enter your username and password")
-elif login_data[1] is False:
+if auth_status is False:
     st.error("Username/password is incorrect")
-elif login_data[1] is True:
-    name, auth_status, username = login_data
+elif auth_status is None:
+    st.warning("Please enter your username and password")
+elif auth_status:
     authenticator.logout("Logout", "sidebar")
-    st.sidebar.success(f"Logged in as {name}")
+    st.sidebar.success(f"Logged in as {authenticator.name}")
 
+    username = authenticator.username
     user_data_path = f"data/{username}_symptoms.csv"
     st.title("SympFlaura: Symptom Tracker")
 
