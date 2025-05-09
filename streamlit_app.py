@@ -17,7 +17,7 @@ credentials = {
         "kiki": {
             "email": "kiki@example.com",
             "name": "Kiersten",
-            "password": "$2b$12$KIXaPEhOqZJxxj1txv1Y7eB4JQ7VAvuk6/N6BCul6NnWwFJgWj8P2"
+            "password": "$2b$12$F74Kq0/8qOTPSWTttdbBPO9W0PLUl1WZrOGMGzoyAE4JjRATxQw0e"
         }
     }
 }

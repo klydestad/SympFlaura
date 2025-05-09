@@ -6,19 +6,19 @@ This document serves to
 
 
 ## NEXT STEPS:
+- User Accounts: Real
 - Web scraping investigation as step
     - (Replace sample data with ...)
 - Branding/UX
 
 # Misc. Todo
-- Construct proper readme format when done
 
 # Table of Contents
 1. Initial Setup Process
-2. ML Component 
-3. Analytics Dashboards
+2. ML Component w/ sklearn 
+3. Analytics Dashboards w/ Flask
 4. Deploy Streamlit App Online
-5. User Accounts
+5. User Accounts: Test w/ Streamlit
 
 
 ## 1. Initial Setup Process
@@ -99,7 +99,7 @@ curl -X POST http://127.0.0.1:5000/predict \
 ### 1. Setup : Fake account
     - pip install streamlit-authenticator
     - update streamlit_app.py to include auth stuff
-    - TODOL
+    - TODO
 
 ## 2. Real accounts:
     - Firebase Authentication/similar?
