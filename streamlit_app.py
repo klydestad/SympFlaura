@@ -6,9 +6,15 @@ import plotly.express as px
 from datetime import datetime
 import seaborn as sns
 import matplotlib.pyplot as plt
+import yaml
+from yaml.loader import SafeLoader
 
 # Page config
 st.set_page_config(page_title="SympFlaura", layout="centered")
+
+hashed_passwords = stauth.Hasher(['sympflaura123'])
+print(hashed_passwords)
+
 
 # ------------------- AUTH -------------------
 # Pre-hashed password for 'sympflaura123'

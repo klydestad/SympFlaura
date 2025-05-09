@@ -99,7 +99,8 @@ curl -X POST http://127.0.0.1:5000/predict \
 ### 1. Setup : Fake account
     - pip install streamlit-authenticator
     - update streamlit_app.py to include auth stuff
-    - TODO
+
+    - TODO continue following yaml setup documention, read up on yaml
 
 ## 2. Real accounts:
     - Firebase Authentication/similar?
