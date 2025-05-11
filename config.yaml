@@ -1,40 +1,26 @@
 cookie:
   expiry_days: 30
-  key: # To be filled with any string
-  name: # To be filled with any string
+  key: testKey
+  name: testName
 credentials:
   usernames:
     jsmith:
       email: jsmith@gmail.com
-      failed_login_attempts: 0 # Will be managed automatically
+      failed_login_attempts: 1
       first_name: John
       last_name: Smith
-      logged_in: False # Will be managed automatically
-      password: abc # Will be hashed automatically
-      roles: # Optional
+      logged_in: false
+      password: $2b$12$vYyyg8U5//lTw1N/4SyXruN3RUT1kzU0sfdWYykN1tPjaPsomLJrq
+      roles:
       - admin
       - editor
       - viewer
     rbriggs:
       email: rbriggs@gmail.com
-      failed_login_attempts: 0 # Will be managed automatically
+      failed_login_attempts: 0
       first_name: Rebecca
       last_name: Briggs
-      logged_in: False # Will be managed automatically
-      password: def # Will be hashed automatically
-      roles: # Optional
+      logged_in: false
+      password: $2b$12$bj4CAJ0AP7WfV3WwkMgUveyDj4/2Lt6P.lVvHoLJQSxmeOiqVDgYm
+      roles:
       - viewer
-oauth2: # Optional
-  google: # Follow instructions: https://developers.google.com/identity/protocols/oauth2
-    client_id: # To be filled
-    client_secret: # To be filled
-    redirect_uri: # URL to redirect to after OAuth2 authentication
-  microsoft: # Follow instructions: https://learn.microsoft.com/en-us/graph/auth-register-app-v2
-    client_id: # To be filled
-    client_secret: # To be filled
-    redirect_uri: # URL to redirect to after OAuth2 authentication
-    tenant_id: # To be filled
-pre-authorized: # Optional
-  emails:
-  - melsby@gmail.com
-api_key: # Optional - register to receive a free API key: https://streamlitauthenticator.com
