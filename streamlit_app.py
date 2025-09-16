@@ -91,11 +91,6 @@ if st.session_state.get('authentication_status'):
         st.info("No symptoms logged yet. Use the form below to get started!")
         st.stop()
 
-    # ------------------- SYMPTOM TIMELINE -------------------
-    st.subheader("\U0001F4C8 Symptom Timeline")
-    fig = px.line(df, x="date", y=["fatigue", "pain", "brain_fog"], markers=True)
-    st.plotly_chart(fig)
-
     # ------------------- NEW ENTRY FORM -------------------
     st.subheader("\U0001F4DD Log Today's Symptoms")
     with st.form("log_form"):
@@ -128,8 +123,8 @@ if st.session_state.get('authentication_status'):
             pd.DataFrame([new_entry]).to_csv(user_data_path, mode='a', header=False, index=False, lineterminator='\n')
             st.rerun()
 
-    # ------------------- ANALYTICS -------------------
-    st.subheader("Daily Symptoms")
+    # ------------------- DAILY SYMPTOMS AVERAGES -------------------
+    st.subheader("Daily Symptoms Average")
     daily_symptoms = df.groupby(df['date'].dt.date).agg({
     'fatigue': 'mean',
     'pain': 'mean', 
@@ -155,25 +150,41 @@ if st.session_state.get('authentication_status'):
         with col4:
             import pandas as pd
             flare_risk = today_row['flare'] if pd.notna(today_row['flare']) else "unknown"
-            st.metric("⚡ Risk Level", flare_risk.title())
+            st.metric("⚡ Flare Risk Level", flare_risk.title())
 
-    st.subheader("7-Day Rolling Symptom Averages")
+    st.subheader("📈 7-Day Rolling Symptom Averages")
     rolling_df = df.copy()
-    rolling_df["rolling_fatigue"] = rolling_df["fatigue"].rolling(7).mean()
-    rolling_df["rolling_pain"] = rolling_df["pain"].rolling(7).mean()
-    rolling_df["rolling_brain_fog"] = rolling_df["brain_fog"].rolling(7).mean()
-    fig2 = px.line(rolling_df, x="date", y=["rolling_fatigue", "rolling_pain", "rolling_brain_fog"],
-                    labels={"value": "Symptom Score"}, title="7-Day Rolling Averages")
-    st.plotly_chart(fig2)
+    rolling_df["rolling_fatigue"] = rolling_df["fatigue"].rolling(7, min_periods=1).mean()
+    rolling_df["rolling_pain"] = rolling_df["pain"].rolling(7, min_periods=1).mean()
+    rolling_df["rolling_brain_fog"] = rolling_df["brain_fog"].rolling(7, min_periods=1).mean()
 
+    # Get current 7-day averages (most recent values)
+    current_fatigue = rolling_df["rolling_fatigue"].iloc[-1]
+    current_pain = rolling_df["rolling_pain"].iloc[-1]
+    current_brain_fog = rolling_df["rolling_brain_fog"].iloc[-1]
 
-
+    # Display current averages
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Current 7-Day Avg Fatigue", f"{current_fatigue:.1f}")
+    with col2:
+        st.metric("Current 7-Day Avg Pain", f"{current_pain:.1f}")
+    with col3:
+        st.metric("Current 7-Day Avg Brain Fog", f"{current_brain_fog:.1f}")        
+        
+    # ------------------- SYMPTOM TIMELINE -------------------          
+    st.subheader("\U0001F4C8 Symptom Timeline")
+    fig = px.line(df, x="date", y=["fatigue", "pain", "brain_fog"], markers=True)
+    st.plotly_chart(fig)   
+        
+    # ------------------- WEEKLY FLARE COUNT -------------------
     st.subheader("Weekly Flare Count")
-    weekly_flares = df.groupby("week")["flare"].sum().reset_index()
+    weekly_flares = df.groupby("week")["flare"].count().reset_index() 
     fig3 = px.bar(weekly_flares, x="week", y="flare", labels={"flare": "Flare Count", "week": "Week"},
-                    title="Number of Flares per Week")
+                    title="Number of Entries per Week")
     st.plotly_chart(fig3)
 
+    # ------------------- SYMPTOM CORRELATION HEATMAP -------------------
     st.subheader("Symptom Correlation Heatmap")
     corr = df[["fatigue", "pain", "brain_fog"]].corr()
     fig4, ax = plt.subplots()
