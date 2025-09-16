@@ -12,7 +12,7 @@ from yaml.loader import SafeLoader
 
 import sys
 import os
-sys.path.append('backend')
+
 from app import pred_result
 
 # Page config
