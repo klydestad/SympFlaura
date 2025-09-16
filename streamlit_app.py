@@ -95,7 +95,7 @@ if st.session_state.get('authentication_status'):
     
     if df.empty:
         st.info("No symptoms logged yet. Use the form below to get started!")
-        st.stop()
+        #st.stop()
 
     # ------------------- NEW ENTRY FORM -------------------
     st.subheader("\U0001F4DD Log Today's Symptoms")
