@@ -9,6 +9,12 @@ import matplotlib.pyplot as plt
 import yaml
 from yaml.loader import SafeLoader
 
+
+import sys
+import os
+sys.path.append('backend')
+from app import predict
+
 # Page config
 st.set_page_config(page_title="SympFlaura", layout="centered")
 
@@ -109,16 +115,12 @@ if st.session_state.get('authentication_status'):
             }
 
             try:
-                response = requests.post(
-                    "http://127.0.0.1:5000/predict",
-                    json={"fatigue": fatigue, "pain": pain, "brain_fog": brain_fog}
-                )
-                result = response.json().get("prediction", "unknown")
+                result = predict(fatigue, pain, brain_fog)
                 new_entry["flare"] = result
                 st.success(f"Entry logged! Flare-up risk: **{result.upper()}**")
             except Exception as e:
                 st.warning(f"Could not get prediction. Error: {e}")
-                st.info("The entry was saved, but no risk level was added.")
+                new_entry["flare"] = "unknown"
 
             pd.DataFrame([new_entry]).to_csv(user_data_path, mode='a', header=False, index=False, lineterminator='\n')
             st.rerun()

@@ -13,5 +13,10 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
+    
+    
+def predict(fatigue, pain, brain_fog):
+    """Direct prediction function for Streamlit"""
+    data_df = pd.DataFrame([{"fatigue": fatigue, "pain": pain, "brain_fog": brain_fog}])
+    return predict_flare(data_df)
 

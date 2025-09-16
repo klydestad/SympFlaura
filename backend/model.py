@@ -1,8 +1,10 @@
 import pandas as pd
 import joblib
+import os
 
 # Load the trained model once
-model = joblib.load("flare_model.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "flare_model.pkl")
+model = joblib.load(model_path)
 
 def predict_flare(df):
     features = df[["fatigue", "pain", "brain_fog"]]
