@@ -13,7 +13,7 @@ from yaml.loader import SafeLoader
 import sys
 import os
 sys.path.append('backend')
-from app import predict
+from app import pred_result
 
 # Page config
 st.set_page_config(page_title="SympFlaura", layout="centered")
@@ -115,7 +115,7 @@ if st.session_state.get('authentication_status'):
             }
 
             try:
-                result = predict(fatigue, pain, brain_fog)
+                result = pred_result(fatigue, pain, brain_fog)
                 new_entry["flare"] = result
                 st.success(f"Entry logged! Flare-up risk: **{result.upper()}**")
             except Exception as e:
@@ -123,7 +123,16 @@ if st.session_state.get('authentication_status'):
                 new_entry["flare"] = "unknown"
 
             pd.DataFrame([new_entry]).to_csv(user_data_path, mode='a', header=False, index=False, lineterminator='\n')
+            
+             # Store the prediction in session state to show until next entry
+            st.session_state['last_prediction'] = result
+            st.session_state['show_prediction'] = True
             st.rerun()
+
+    # Show prediction message if exists
+    if st.session_state.get('show_prediction', False):
+        result = st.session_state.get('last_prediction', 'unknown')
+        st.info(f"🔮 **Last Prediction:** Flare-up risk is **{result.upper()}**")
 
     # ------------------- DAILY SYMPTOMS AVERAGES -------------------
     st.subheader("Daily Symptoms Average")
@@ -149,10 +158,9 @@ if st.session_state.get('authentication_status'):
             st.metric("Pain", f"{today_row['pain']:.1f}/10")
         with col3:
             st.metric("Brain Fog", f"{today_row['brain_fog']:.1f}/10")
-        with col4:
-            import pandas as pd
-            flare_risk = today_row['flare'] if pd.notna(today_row['flare']) else "unknown"
-            st.metric("⚡ Flare Risk Level", flare_risk.title())
+        # with col4:
+        #     flare_risk = today_row['flare'] if pd.notna(today_row['flare']) else "unknown"
+        #     st.metric("⚡ Flare Risk Level", flare_risk.title())
 
     st.subheader("📈 7-Day Rolling Symptom Averages")
     rolling_df = df.copy()
