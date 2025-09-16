@@ -237,25 +237,28 @@ if st.session_state.get('authentication_status'):
             
   # ------------------- 7-DAY ROLLING SYMPTOM AVERAGES ------------------- 
     st.subheader("📈 7-Day Rolling Symptom Averages")
-    rolling_df = df.copy()
-    rolling_df["rolling_fatigue"] = rolling_df["fatigue"].rolling(7, min_periods=1).mean()
-    rolling_df["rolling_pain"] = rolling_df["pain"].rolling(7, min_periods=1).mean()
-    rolling_df["rolling_brain_fog"] = rolling_df["brain_fog"].rolling(7, min_periods=1).mean()
+    if len(df) >= 7:  # Need some historical data
+        rolling_df = df.copy()
+        rolling_df["rolling_fatigue"] = rolling_df["fatigue"].rolling(7, min_periods=1).mean()
+        rolling_df["rolling_pain"] = rolling_df["pain"].rolling(7, min_periods=1).mean()
+        rolling_df["rolling_brain_fog"] = rolling_df["brain_fog"].rolling(7, min_periods=1).mean()
 
-    # Get current 7-day averages (most recent values)
-    current_fatigue = rolling_df["rolling_fatigue"].iloc[-1]
-    current_pain = rolling_df["rolling_pain"].iloc[-1]
-    current_brain_fog = rolling_df["rolling_brain_fog"].iloc[-1]
+        # Get current 7-day averages (most recent values)
+        current_fatigue = rolling_df["rolling_fatigue"].iloc[-1]
+        current_pain = rolling_df["rolling_pain"].iloc[-1]
+        current_brain_fog = rolling_df["rolling_brain_fog"].iloc[-1]
 
-    # Display current averages
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Current 7-Day Avg Fatigue", f"{current_fatigue:.1f}")
-    with col2:
-        st.metric("Current 7-Day Avg Pain", f"{current_pain:.1f}")
-    with col3:
-        st.metric("Current 7-Day Avg Brain Fog", f"{current_brain_fog:.1f}")        
-        
+        # Display current averages
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Current 7-Day Avg Fatigue", f"{current_fatigue:.1f}")
+        with col2:
+            st.metric("Current 7-Day Avg Pain", f"{current_pain:.1f}")
+        with col3:
+            st.metric("Current 7-Day Avg Brain Fog", f"{current_brain_fog:.1f}")  
+    else:
+            st.info("Need more data for 7-day forecast")
+            
     # ------------------- SYMPTOM TIMELINE -------------------          
     st.subheader("\U0001F4C8 Symptom Timeline")
     fig = px.line(df, x="date", y=["fatigue", "pain", "brain_fog"], markers=True)
