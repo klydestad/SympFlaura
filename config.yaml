@@ -9,17 +9,17 @@ credentials:
       failed_login_attempts: 0
       first_name: John
       last_name: Smith
-      logged_in: true
+      logged_in: false
       password: $2b$12$LZNzmnSBUE2TNkhar.eJG.BSvfS1hExKWdIR2YtT6TywVaZcRb7ii
       roles:
       - admin
       - editor
       - viewer
-    rbriggs:
+    User:
       email: rbriggs@gmail.com
       failed_login_attempts: 0
-      first_name: Rebecca
-      last_name: Briggs
+      first_name: User
+      last_name: (Demo)
       logged_in: false
       password: $2b$12$Hxf/P.A0YyL64Q.7l9GBSudkymmmvBTsNa2CWa0XnsKV0.Cq7XrLK
       roles:
