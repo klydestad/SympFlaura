@@ -43,10 +43,26 @@ authenticator = stauth.Authenticate(
 )
 
 
-try:
-    authenticator.login()
-except Exception as e:
-    st.error(e)
+if not st.session_state.get('authentication_status'):
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        try:
+            authenticator.login()
+        except Exception as e:
+            st.error(e)
+    
+    with col2:
+        st.markdown("**Demo Account Credentials:**")
+        st.markdown("*Copy and paste into login!*")
+        st.info("user")
+        st.info("sympflaura123")
+else:
+    # Just do login attempt if already authenticated
+    try:
+        authenticator.login()
+    except Exception as e:
+        st.error(e)
 
 if st.session_state.get('authentication_status'):
     authenticator.logout('Logout', 'sidebar')
